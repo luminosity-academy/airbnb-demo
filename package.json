@@ -1,0 +1,14 @@
+{
+  "name": "airbnb-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "next build",
+    "serve": "next start",
+    "start": "next"
+  },
+  "dependencies": {
+    "next": "^9.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}

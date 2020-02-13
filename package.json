@@ -6,6 +6,7 @@
     "lint": "tslint -p . 'components/**/*.ts?(x)' 'pages/**/*.ts?(x)'",
     "serve": "next start",
     "start": "next",
+    "test": "echo 'No tests defined!'",
     "type-check": "tsc"
   },
   "dependencies": {

@@ -11,7 +11,6 @@ import {
   IconButton,
   Typography,
   InputBase,
-  Button,
   Badge,
   MenuItem,
   Menu
@@ -103,8 +102,6 @@ const Header: React.FC<{}> = () => {
     setAnchorEl(null);
   };
 
-  console.log("here");
-
   const menuId = "primary-search-account-menu";
 
   return (
@@ -120,7 +117,7 @@ const Header: React.FC<{}> = () => {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Airbnb Demo
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -135,7 +132,6 @@ const Header: React.FC<{}> = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <Button variant="contained">Hello</Button>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">

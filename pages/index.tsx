@@ -1,6 +1,7 @@
 import * as React from "react";
-import Link from "next/link";
+
 import { NextPage } from "next";
+import { default as Link } from "next/link";
 
 const IndexPage: NextPage = () => {
   return (

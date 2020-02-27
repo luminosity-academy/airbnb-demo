@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 
 export interface IListing {
   title: string;
@@ -21,9 +21,8 @@ const listingSchema = new mongoose.Schema(
   }
 );
 
-const listingModel = mongoose.model<IListing & mongoose.Document>(
-  "Listing",
-  listingSchema
-);
+const listingModel =
+  (mongoose.models.Listing as Model<IListing & mongoose.Document>) ||
+  mongoose.model<IListing & mongoose.Document>("Listing", listingSchema);
 
 export default listingModel;

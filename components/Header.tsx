@@ -24,6 +24,7 @@ import {
   Notifications as NotificationsIcon,
   Search as SearchIcon
 } from "@material-ui/icons";
+import LoginDialog from "./LoginDialog";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -168,6 +169,9 @@ const Header: React.FC<{}> = () => {
           </div>
         </Toolbar>
       </AppBar>
+
+      <LoginDialog />
+
       <Menu
         anchorEl={anchorEl}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}

@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import App from "next/app";
-import Head from "next/head";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { default as App } from "next/app";
+import { default as Head } from "next/head";
 import Header from "../components/Header";
 
 const theme = createMuiTheme({

@@ -1,27 +1,28 @@
-import React from "react";
-import {
-  fade,
-  makeStyles,
-  Theme,
-  createStyles
-} from "@material-ui/core/styles";
+import * as React from "react";
+
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  InputBase,
   Badge,
+  IconButton,
+  InputBase,
+  Menu,
   MenuItem,
-  Menu
+  Toolbar,
+  Typography
 } from "@material-ui/core";
 import {
-  Menu as MenuIcon,
-  Search as SearchIcon,
+  createStyles,
+  fade,
+  makeStyles,
+  Theme
+} from "@material-ui/core/styles";
+import {
   AccountCircle,
   Mail as MailIcon,
+  Menu as MenuIcon,
+  MoreVert as MoreIcon,
   Notifications as NotificationsIcon,
-  MoreVert as MoreIcon
+  Search as SearchIcon
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>

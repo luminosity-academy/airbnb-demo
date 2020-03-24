@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import User, { IUser } from "../../../models/User";
+import { hashPassword } from "../../../util/hash";
 import { middleware } from "../../../util/mongoose";
 
 const userRoute = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -20,17 +21,27 @@ const userRoute = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (method === "POST") {
       try {
-        const user: IUser = {
-          name: String(req.body.name),
-          email: String(req.body.email),
-          password: String(req.body.password)
-        };
+        const userBody: IUser = JSON.parse(req.body);
 
-        const createdUser = await User.create(user);
+        if (userBody.password) {
+          const hashedPassword = await hashPassword(userBody.password);
 
-        // Update or create data in your database
-        return res.status(200).json(createdUser);
+          const user: IUser = {
+            name: userBody.name,
+            email: userBody.email,
+            password: hashedPassword
+          };
+
+          const createdUser = await User.create(user);
+
+          // Update or create data in your database
+          return res.status(200).json(createdUser);
+        }
+
+        return res.status(500).end(`Must supply password.`);
       } catch (e) {
+        console.error(e);
+
         return res.status(500).json({ message: "Error creating user." });
       }
     }

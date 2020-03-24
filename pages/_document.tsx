@@ -3,7 +3,6 @@ import * as React from "react";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import { default as Document, Head, Main, NextScript } from "next/document";
 
-
 export default class MyDocument extends Document {
   render() {
     return (
@@ -12,7 +11,7 @@ export default class MyDocument extends Document {
           {/* PWA primary color */}
           <meta name="theme-color" content="#202020" />
           <link
-            href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+            href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap"
             rel="stylesheet"
           />
         </Head>
@@ -25,14 +24,14 @@ export default class MyDocument extends Document {
   }
 }
 
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async ctx => {
   // Render app and page and get the context of the page with collected side effects.
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
+      enhanceApp: App => props => sheets.collect(<App {...props} />)
     });
 
   const initialProps = await Document.getInitialProps(ctx);

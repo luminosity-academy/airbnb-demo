@@ -15,7 +15,7 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: [
-      "Montserrat",
+      "Fira Sans",
       '"Helvetica Neue"',
       "Arial",
       "sans-serif",

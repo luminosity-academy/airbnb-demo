@@ -3,7 +3,7 @@ import mongoose, { Model } from "mongoose";
 export interface IUser {
   email: string;
   name: string;
-  password: string;
+  password?: string;
 }
 
 const userSchema = new mongoose.Schema(

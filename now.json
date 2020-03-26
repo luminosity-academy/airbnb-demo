@@ -1,4 +1,9 @@
 {
   "name": "airbnb-demo",
-  "version": 2
+  "version": 2,
+  "build": {
+    "env": {
+      "JWT_SECRET": "@jwt-secret"
+    }
+  }
 }

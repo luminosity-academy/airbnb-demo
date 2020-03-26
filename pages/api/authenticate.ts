@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import jsonwebtoken from "jsonwebtoken";
 
 import User, { IUser } from "../../models/User";
-import { hashPassword } from "../../util/hash";
+import { comparePassword } from "../../util/hash";
 import { middleware } from "../../util/mongoose";
 
 const authRoute = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -16,19 +16,29 @@ const authRoute = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.url) {
     if (method === "POST") {
       try {
-        const hashedPassword = await hashPassword(String(req.body.password));
+        const userBody: IUser = JSON.parse(req.body);
 
-        const dbUser = await User.findOne({ email: String(req.body.email) });
+        const dbUser = await User.findOne({ email: userBody.email });
 
-        if (dbUser && hashedPassword === dbUser.password) {
-          const tokenPayload: IUser = {
-            email: dbUser.email,
-            name: dbUser.name
-          };
+        if (dbUser && dbUser.password && userBody.password) {
+          const isPasswordValid = await comparePassword(
+            userBody.password,
+            dbUser.password
+          );
 
-          const token = jsonwebtoken.sign(tokenPayload, process.env.JWT_SECRET);
+          if (isPasswordValid) {
+            const tokenPayload: IUser = {
+              email: dbUser.email,
+              name: dbUser.name
+            };
 
-          return res.status(200).json(token);
+            const token = jsonwebtoken.sign(
+              tokenPayload,
+              process.env.JWT_SECRET
+            );
+
+            return res.status(200).json(token);
+          }
         }
 
         return res.status(401).json({ message: "Invalid password." });

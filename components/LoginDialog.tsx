@@ -9,26 +9,39 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { IUser } from "../models/User";
 
-const LoginDialog: React.FC<{ open: boolean; onClose(): void }> = ({
-  open,
-  onClose
-}) => {
+const LoginDialog: React.FC<{
+  open: "login" | "signup" | null;
+  onClose(): void;
+}> = ({ open, onClose }) => {
   const [email, setEmail] = React.useState<string>("");
   const [name, setName] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
 
-  const handleRegister = async () => {
+  const handleSubmit = async () => {
     try {
-      const newUser: IUser = { email, password, name };
+      if (open === "signup") {
+        const newUser: IUser = { email, password, name };
 
-      const user = await fetch("/api/user", {
-        method: "POST",
-        body: JSON.stringify(newUser)
-      });
+        const user = await fetch("/api/user", {
+          method: "POST",
+          body: JSON.stringify(newUser)
+        });
 
-      const json = await user.json();
+        const json = await user.json();
 
-      console.log(json);
+        console.log(json);
+      } else {
+        const newUser: IUser = { email, password };
+
+        const user = await fetch("/api/authenticate", {
+          method: "POST",
+          body: JSON.stringify(newUser)
+        });
+
+        const json = await user.json();
+
+        console.log(json);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -37,21 +50,25 @@ const LoginDialog: React.FC<{ open: boolean; onClose(): void }> = ({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Register</DialogTitle>
+    <Dialog open={Boolean(open)} onClose={onClose}>
+      <DialogTitle id="form-dialog-title">
+        {open === "login" ? "Login" : "Register"}
+      </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To register to this website, please enter your email address and
-          password here.
+          To {open === "login" ? "log in to" : "sign up for"} this website,
+          please enter your email address and password here.
         </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Name"
-          fullWidth
-          onChange={e => setName(e.target.value)}
-        />
+        {open === "signup" && (
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            fullWidth
+            onChange={e => setName(e.target.value)}
+          />
+        )}
         <TextField
           margin="dense"
           id="name"
@@ -73,8 +90,8 @@ const LoginDialog: React.FC<{ open: boolean; onClose(): void }> = ({
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleRegister} color="primary">
-          Register
+        <Button onClick={handleSubmit} color="primary">
+          {open === "login" ? "Login" : "Register"}
         </Button>
       </DialogActions>
     </Dialog>

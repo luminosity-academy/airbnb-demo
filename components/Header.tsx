@@ -22,20 +22,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1
+    },
+    loginButton: {
+      marginRight: theme.spacing(2)
     }
   })
 );
 
 const Header: React.FC<{}> = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState<boolean>(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState<"login" | "signup" | null>(null);
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(null);
   };
 
   return (
@@ -57,8 +56,20 @@ const Header: React.FC<{}> = () => {
 
             <Button
               variant="contained"
-              color="primary"
-              onClick={handleClickOpen}
+              color="secondary"
+              onClick={() => {
+                setOpen("login");
+              }}
+              className={classes.loginButton}
+            >
+              Login
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                setOpen("signup");
+              }}
             >
               Register
             </Button>

@@ -1010,10 +1010,10 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@^5.7.1":
-  version "5.7.1"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.7.1.tgz#503d902e873dce8546f2fed6b8ed9c6474cb353d"
-  integrity sha512-lCe+ctykvXgI58bWlEAgladuVHmgSWbAuCMapy9+2m+aUm4DfjYGJ1HXIqubr+YflDN8hfjDaX7BGVxO/Fl06Q==
+"@types/mongoose@^5.7.26":
+  version "5.7.26"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.7.26.tgz#791db8a8051ba7493329899ffb1d23ff7eff62db"
+  integrity sha512-R2DddXp4dUsdiCTq2aB/C3xF35Xt56+maWJF51mvE/HT2jr0iYiTEU9dlCSYXueCQFwPytw5k1f78RNpK0dnHQ==
   dependencies:
     "@types/mongodb" "*"
     "@types/node" "*"
